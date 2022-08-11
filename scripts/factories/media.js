@@ -1,17 +1,26 @@
-const mediaFactory = (data, photographer) => {
-  const { image, video, likes, title } = data;
-  console.log("d", data);
+class Media {
+  constructor(title, image, video, likes, photographer) {
+    this.image = image;
+    this.video = video;
+    this.likes = likes;
+    this.title = title;
+    this.photographer = photographer;
+  }
 
-  // find image file path
-  const photographerFirstName = photographer.name.split(" ")[0];
-  const mediaFile = `assets/photos/${photographerFirstName}/${image || video}`;
+  getMediaPath() {
+    const photographerFirstName = this.photographer.name.split(" ")[0];
+    const mediaFile = `assets/photos/${photographerFirstName}/${
+      this.image || this.video
+    }`;
+    return mediaFile;
+  }
 
-  const getMediaCardDom = () => {
+  getMediaCardDom() {
     // DOM elements
     const article = document.createElement("article");
     // handle type of media
     let mediaElement = null;
-    image
+    this.image
       ? (mediaElement = document.createElement("img"))
       : (mediaElement = document.createElement("video"));
     const infoDiv = document.createElement("div");
@@ -20,16 +29,16 @@ const mediaFactory = (data, photographer) => {
     const heartIcon = document.createElement("i");
 
     // add attributes
-    mediaElement.setAttribute("src", mediaFile);
-    mediaElement.setAttribute("alt", title);
+    mediaElement.setAttribute("src", this.getMediaPath());
+    mediaElement.setAttribute("alt", this.title);
     infoDiv.classList.add("media-details");
     titleElement.classList.add("red-text");
     likesElement.classList.add("red-text", "likes");
     heartIcon.classList.add("fa-solid", "fa-heart");
 
     // add content
-    titleElement.textContent = title;
-    likesElement.textContent = `${likes} `;
+    titleElement.textContent = this.title;
+    likesElement.textContent = `${this.likes} `;
 
     // add element to DOM
     likesElement.appendChild(heartIcon);
@@ -39,9 +48,9 @@ const mediaFactory = (data, photographer) => {
     article.appendChild(infoDiv);
 
     return article;
-  };
+  }
 
-  const getSelectMenu = () => {
+  getSelectMenu() {
     // get DOM elements
     const selectElt = document.querySelector("select");
     const selectDiv = document.querySelector(".custom-select");
@@ -90,7 +99,5 @@ const mediaFactory = (data, photographer) => {
       // toggle active style
       e.target.classList.toggle("active");
     });
-  };
-
-  return { getMediaCardDom, getSelectMenu };
-};
+  }
+}
