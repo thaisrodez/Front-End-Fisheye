@@ -1,0 +1,82 @@
+/* menu filters */
+
+.menu-filters {
+  margin: 20px 0px;
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  font-size: 18px;
+  font-weight: 700;
+  height: 80px;
+  position: relative;
+  z-index: 10;
+}
+
+.menu-filters label {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.custom-select {
+  color: white;
+  width: 140px;
+  position: absolute;
+  left: 86px;
+}
+
+/* hide select input */
+.custom-select select {
+  display: none;
+}
+
+.new-select {
+  background-color: #901C1C;
+  color: white;
+  padding: 16px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+}
+
+.new-select.active {
+  border-radius: 5px 5px 0px 0px;
+}
+
+.new-select::after {
+  content: "<";
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+
+.new-select.active::after {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.select-items div {
+  background-color: #901C1C;
+  padding: 16px 12px;
+  cursor: pointer;
+  position: relative;
+}
+
+.select-items div:nth-child(1):before, .select-items div:nth-child(2):before {
+  content: "";
+  position: absolute;
+  left: 12;
+  bottom: 0;
+  height: 1px;
+  width: 116px;
+  border-bottom: 1px solid white;
+}
+
+.select-items div:last-child {
+  border-radius: 0px 0px 5px 5px;
+}
+
+.select-hide {
+  display: none;
+}

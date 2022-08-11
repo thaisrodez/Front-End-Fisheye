@@ -29,6 +29,12 @@ const displayPhotographer = (photographer) => {
   photographerMain.appendChild(insert);
 };
 
+const displayFilters = (medias, photographer) => {
+  const menuFilters = document.querySelector(".menu-filters");
+  const mediaModel = mediaFactory(medias, photographer);
+  mediaModel.getSelectMenu();
+};
+
 const displayMedia = (medias, photographer) => {
   const portfolio = document.querySelector(".portfolio");
   medias.forEach((media) => {
@@ -50,6 +56,7 @@ const init = async () => {
   const photographerMedia = media.filter(
     (media) => media.photographerId == photographerId
   );
+  displayFilters(photographerMedia, currentPhotographer);
   displayMedia(photographerMedia, currentPhotographer);
 };
 
