@@ -1,8 +1,10 @@
 @import url("photographer.css");
+@import url("components/select.css");
+@import url("components/portfolio.css");
 
 body {
   font-family: "DM Sans", sans-serif;
-  margin: 0;
+  margin: 0 auto;
 }
 
 

@@ -22,7 +22,6 @@ const displayPhotographer = (photographer) => {
   const photographerMain = document.getElementById("main");
 
   const photographerInfo = photographerFactory(photographer);
-  console.log(photographerInfo);
   const { nameDiv, img, insert } = photographerInfo.getPhotographerData();
   // console.log(photographerHeaderDOM);
   photographerHeader.prepend(nameDiv);

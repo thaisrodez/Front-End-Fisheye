@@ -20,8 +20,6 @@
   margin: 0;
 }
 
-
-
 .photographer-tagline {
   color: #525252;
   font-size: 18px;
@@ -96,38 +94,6 @@ form input {
   border-radius: 5px;
 }
 
-/* portfolio */
-.portfolio {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 100px;
-  margin: 100px;
-}
-
-.portfolio article img {
-  width: 350px;
-  height: 350px;
-  object-fit: cover;
-  border-radius: 5px;
-}
-
-.portfolio article video {
-  width: 350px;
-  height: 350px;
-}
-
-.media-details {
-  margin-top: 12px;
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.likes {
-  font-weight: 500;
-}
-
 /* price and likes insert */
 .insert {
   background-color: #DB8876;
@@ -145,12 +111,4 @@ form input {
 .insert p {
   font-size: 24px;
   font-weight: 500;
-}
-
-/* common class */
-.red-text {
-  color: #901C1C;
-  font-size: 24px;
-  font-weight: 400;
-  margin: 0;
 }

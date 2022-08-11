@@ -44,7 +44,7 @@ const photographerFactory = (data) => {
     // header infos
     const nameDiv = document.createElement("div");
     const nameTitle = document.createElement("h1");
-    const cityElement = document.createElement("p");
+    const cityElement = document.createElement("h2");
     const taglineElement = document.createElement("p");
     const img = document.createElement("img");
 

@@ -9,28 +9,30 @@ const mediaFactory = (data, photographer) => {
   const getMediaCardDom = () => {
     // DOM elements
     const article = document.createElement("article");
+    // handle type of media
     let mediaElement = null;
-    if (image) mediaElement = document.createElement("img");
-    if (video) mediaElement = document.createElement("video");
+    image
+      ? (mediaElement = document.createElement("img"))
+      : (mediaElement = document.createElement("video"));
     const infoDiv = document.createElement("div");
-    const titleElement = document.createElement("p");
+    const titleElement = document.createElement("h3");
     const likesElement = document.createElement("p");
+    const heartIcon = document.createElement("i");
 
     // add attributes
     mediaElement.setAttribute("src", mediaFile);
     mediaElement.setAttribute("alt", title);
-    if (video) {
-      mediaElement.setAttribute("controls", "");
-    }
     infoDiv.classList.add("media-details");
     titleElement.classList.add("red-text");
-    likesElement.classList.add("red-text");
+    likesElement.classList.add("red-text", "likes");
+    heartIcon.classList.add("fa-solid", "fa-heart");
 
     // add content
     titleElement.textContent = title;
-    likesElement.textContent = likes;
+    likesElement.textContent = `${likes} `;
 
     // add element to DOM
+    likesElement.appendChild(heartIcon);
     infoDiv.appendChild(titleElement);
     infoDiv.appendChild(likesElement);
     article.appendChild(mediaElement);
