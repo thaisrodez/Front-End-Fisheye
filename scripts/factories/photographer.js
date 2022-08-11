@@ -1,29 +1,77 @@
-function photographerFactory(data) {
-  const { name, portrait, city, country, tagline, price } = data;
+const photographerFactory = (data) => {
+  const { name, portrait, city, country, tagline, price, id } = data;
 
   const picture = `assets/photographers/${portrait}`;
+  const hrefPhotographer = `./photographer.html?id=${id}`;
 
-  function getUserCardDOM() {
+  const getUserCardDOM = () => {
+    // photographer DOM element
     const article = document.createElement("article");
+    const link = document.createElement("a");
     const img = document.createElement("img");
-    img.setAttribute("src", picture);
-    img.setAttribute("alt", `photo de ${name} - lien vers la page de ${name}`);
-    const photographer_name = document.createElement("h2");
-    photographer_name.textContent = name;
+    const photographerName = document.createElement("h2");
     const place = document.createElement("h3");
-    place.textContent = `${city}, ${country}`;
     const quote = document.createElement("p");
-    quote.textContent = tagline;
+    const photographerPrice = document.createElement("p");
+
+    // set attributes
+    link.setAttribute("href", hrefPhotographer);
+    link.setAttribute("aria-label", `${name}`);
+    img.setAttribute("src", picture);
+    img.setAttribute("alt", "");
+    img.classList.add("photographer_img");
     quote.classList.add("tagline");
-    const photographer_price = document.createElement("p");
-    photographer_price.textContent = `${price}€/jour`;
-    photographer_price.classList.add("price");
-    article.appendChild(img);
-    article.appendChild(photographer_name);
+    photographerPrice.classList.add("price");
+
+    // text content
+    photographerName.textContent = name;
+    place.textContent = `${city}, ${country}`;
+    quote.textContent = tagline;
+    photographerPrice.textContent = `${price}€/jour`;
+
+    // add element in DOM
+    article.appendChild(link);
+    link.appendChild(img);
+    link.appendChild(photographerName);
     article.appendChild(place);
     article.appendChild(quote);
-    article.appendChild(photographer_price);
+    article.appendChild(photographerPrice);
     return article;
-  }
-  return { name, picture, getUserCardDOM };
-}
+  };
+
+  const getPhotographerData = () => {
+    // DOM elements
+    // header infos
+    const nameDiv = document.createElement("div");
+    const nameTitle = document.createElement("h1");
+    const cityElement = document.createElement("h2");
+    const taglineElement = document.createElement("p");
+    const img = document.createElement("img");
+
+    // price and likes insert
+    const insert = document.createElement("dic");
+    const priceElement = document.createElement("p");
+
+    // set attributes
+    cityElement.classList.add("red-text");
+    taglineElement.classList.add("photographer-tagline");
+    img.setAttribute("src", picture);
+    img.setAttribute("alt", name);
+    img.classList.add("photographer_img");
+    insert.classList.add("insert");
+
+    // text content
+    nameTitle.textContent = name;
+    cityElement.textContent = `${city}, ${country}`;
+    taglineElement.textContent = tagline;
+    priceElement.textContent = `${price}€ / jour`;
+
+    // add element in DOM
+    nameDiv.appendChild(nameTitle);
+    nameDiv.appendChild(cityElement);
+    nameDiv.appendChild(taglineElement);
+    insert.appendChild(priceElement);
+    return { nameDiv, img, insert };
+  };
+  return { getUserCardDOM, getPhotographerData };
+};

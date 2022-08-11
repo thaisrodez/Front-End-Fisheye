@@ -1,0 +1,45 @@
+.media-elements {
+  margin: 0 100px;
+}
+
+/* portfolio */
+.portfolio {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  row-gap: 68px;
+}
+
+.portfolio article img {
+  width: 350px;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.portfolio article video {
+  width: 350px;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.media-details {
+  margin-top: 12px;
+  display: flex;
+  width: 350px;
+  justify-content: space-between;
+  align-items: start;
+  gap: 16px;
+}
+
+.likes {
+  white-space: nowrap;
+}
+
+.red-text {
+  color: #901C1C;
+  font-size: 24px;
+  font-weight: 400;
+  margin: 0;
+}
