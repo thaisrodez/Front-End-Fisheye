@@ -1,33 +1,24 @@
-// get photogrpahers data
-const getPhotographers = async () => {
-  try {
-    const jsonFile = "data/photographers.json";
-    const res = await fetch(jsonFile);
-    const data = await res.json();
-    const photographers = await data.photographers;
+class Home {
+  constructor() {
+    this.photographerApi = new PhotographerApi("data/photographers.json");
 
-    return photographers;
-  } catch (error) {
-    console.log(error);
+    this.$photographersSection = document.querySelector(
+      ".photographer_section"
+    );
   }
-};
 
-// display photographers data
-const displayData = (photographers) => {
-  const photographersSection = document.querySelector(".photographer_section");
+  async main() {
+    // get photographers data
+    const photographersData = await this.photographerApi.get();
 
-  photographers.forEach((photographer) => {
-    const photographerModel = photographerFactory(photographer);
-    const userCardDOM = photographerModel.getUserCardDOM();
-    photographersSection.appendChild(userCardDOM);
-  });
-};
+    // display photographers data
+    photographersData.photographers.forEach((photographer) => {
+      const photographerModel = new Photographer(photographer);
+      const photographerCardDom = photographerModel.getUserCardDOM();
+      this.$photographersSection.appendChild(photographerCardDom);
+    });
+  }
+}
 
-const init = async () => {
-  // get photographers data
-  const photographers = await getPhotographers();
-  // display photographers data
-  displayData(photographers);
-};
-
-init();
+const home = new Home();
+home.main();

@@ -1,10 +1,17 @@
-const photographerFactory = (data) => {
-  const { name, portrait, city, country, tagline, price, id } = data;
+class Photographer {
+  constructor(data) {
+    this._id = data.id;
+    this._name = data.name;
+    this._portrait = data.portrait;
+    this._city = data.city;
+    this._country = data.country;
+    this._tagline = data.tagline;
+    this._price = data.price;
+    this._picture = `assets/photographers/${this._portrait}`;
+    this._hrefPhotographer = `./photographer.html?id=${this._id}`;
+  }
 
-  const picture = `assets/photographers/${portrait}`;
-  const hrefPhotographer = `./photographer.html?id=${id}`;
-
-  const getUserCardDOM = () => {
+  getUserCardDOM = () => {
     // photographer DOM element
     const article = document.createElement("article");
     const link = document.createElement("a");
@@ -15,19 +22,19 @@ const photographerFactory = (data) => {
     const photographerPrice = document.createElement("p");
 
     // set attributes
-    link.setAttribute("href", hrefPhotographer);
-    link.setAttribute("aria-label", `${name}`);
-    img.setAttribute("src", picture);
+    link.setAttribute("href", this._hrefPhotographer);
+    link.setAttribute("aria-label", `${this._name}`);
+    img.setAttribute("src", this._picture);
     img.setAttribute("alt", "");
     img.classList.add("photographer_img");
     quote.classList.add("tagline");
     photographerPrice.classList.add("price");
 
     // text content
-    photographerName.textContent = name;
-    place.textContent = `${city}, ${country}`;
-    quote.textContent = tagline;
-    photographerPrice.textContent = `${price}€/jour`;
+    photographerName.textContent = this._name;
+    place.textContent = `${this._city}, ${this._country}`;
+    quote.textContent = this._tagline;
+    photographerPrice.textContent = `${this._price}€/jour`;
 
     // add element in DOM
     article.appendChild(link);
@@ -39,7 +46,7 @@ const photographerFactory = (data) => {
     return article;
   };
 
-  const getPhotographerData = () => {
+  getPhotographerHeaderDOM = () => {
     // DOM elements
     // header infos
     const nameDiv = document.createElement("div");
@@ -55,16 +62,16 @@ const photographerFactory = (data) => {
     // set attributes
     cityElement.classList.add("red-text");
     taglineElement.classList.add("photographer-tagline");
-    img.setAttribute("src", picture);
-    img.setAttribute("alt", name);
+    img.setAttribute("src", this._picture);
+    img.setAttribute("alt", this._name);
     img.classList.add("photographer_img");
     insert.classList.add("insert");
 
     // text content
-    nameTitle.textContent = name;
-    cityElement.textContent = `${city}, ${country}`;
-    taglineElement.textContent = tagline;
-    priceElement.textContent = `${price}€ / jour`;
+    nameTitle.textContent = this._name;
+    cityElement.textContent = `${this._city}, ${this._country}`;
+    taglineElement.textContent = this._tagline;
+    priceElement.textContent = `${this._price}€ / jour`;
 
     // add element in DOM
     nameDiv.appendChild(nameTitle);
@@ -73,5 +80,4 @@ const photographerFactory = (data) => {
     insert.appendChild(priceElement);
     return { nameDiv, img, insert };
   };
-  return { getUserCardDOM, getPhotographerData };
-};
+}
