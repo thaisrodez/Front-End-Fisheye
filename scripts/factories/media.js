@@ -1,17 +1,26 @@
-const mediaFactory = (data, photographer) => {
-  const { image, video, likes, title } = data;
-  console.log("d", data);
+class Media {
+  constructor(data, photographer) {
+    this._image = data.image;
+    this._video = data.video;
+    this._likes = data.likes;
+    this._title = data.title;
+    this._photographer = photographer;
+  }
 
-  // find image file path
-  const photographerFirstName = photographer.name.split(" ")[0];
-  const mediaFile = `assets/photos/${photographerFirstName}/${image || video}`;
+  getMediaPath() {
+    const photographerFirstName = this._photographer.name.split(" ")[0];
+    const mediaFile = `assets/photos/${photographerFirstName}/${
+      this._image || this._video
+    }`;
+    return mediaFile;
+  }
 
-  const getMediaCardDom = () => {
+  getMediaCardDom() {
     // DOM elements
     const article = document.createElement("article");
     // handle type of media
     let mediaElement = null;
-    image
+    this._image
       ? (mediaElement = document.createElement("img"))
       : (mediaElement = document.createElement("video"));
     const infoDiv = document.createElement("div");
@@ -20,16 +29,17 @@ const mediaFactory = (data, photographer) => {
     const heartIcon = document.createElement("i");
 
     // add attributes
-    mediaElement.setAttribute("src", mediaFile);
-    mediaElement.setAttribute("alt", title);
+    mediaElement.setAttribute("src", this.getMediaPath());
+    // TO DO : alt only on image
+    mediaElement.setAttribute("alt", this._title);
     infoDiv.classList.add("media-details");
     titleElement.classList.add("red-text");
     likesElement.classList.add("red-text", "likes");
     heartIcon.classList.add("fa-solid", "fa-heart");
 
     // add content
-    titleElement.textContent = title;
-    likesElement.textContent = `${likes} `;
+    titleElement.textContent = this._title;
+    likesElement.textContent = `${this._likes} `;
 
     // add element to DOM
     likesElement.appendChild(heartIcon);
@@ -39,7 +49,5 @@ const mediaFactory = (data, photographer) => {
     article.appendChild(infoDiv);
 
     return article;
-  };
-
-  return { getMediaCardDom };
-};
+  }
+}

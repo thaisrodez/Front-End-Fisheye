@@ -31,7 +31,19 @@
           Contactez-moi
         </button>
       </div>
-      <section class="portfolio"></section>
+      <section class="media-elements">
+        <div class="menu-filters" role="button">
+          <label for="filter" id="filter-label">Trier par</label>
+          <div class="custom-select">
+            <select name="filter" id="filter">
+              <option value="popularity">Popularité</option>
+              <option value="date">Date</option>
+              <option value="title">Titre</option>
+            </select>
+          </div>
+        </div>
+        <div class="portfolio"></div>
+      </section>
     </main>
     <div id="contact_modal">
       <div class="modal">
@@ -48,10 +60,15 @@
         </form>
       </div>
     </div>
+    <!-- Pages -->
     <script src="scripts/pages/photographer.js"></script>
+    <!-- Factories -->
     <script src="scripts/factories/Photographer.js"></script>
     <script src="scripts/factories/media.js"></script>
+    <!-- Templates -->
+    <script src="/scripts/templates/SorterForm.js"></script>
+    <!-- Utils -->
     <script src="/scripts/utils/contactForm.js"></script>
-    <script src="scripts/pages/photographer.js"></script>
+    <script src="/scripts/utils/Sorter.js"></script>
   </body>
 </html>

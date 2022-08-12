@@ -29,10 +29,15 @@ const displayPhotographer = (photographer) => {
   photographerMain.appendChild(insert);
 };
 
+const displayFilters = (medias, photographer) => {
+  const Sorter = new SorterForm(medias, photographer);
+  Sorter.render();
+};
+
 const displayMedia = (medias, photographer) => {
   const portfolio = document.querySelector(".portfolio");
   medias.forEach((media) => {
-    const mediaModel = mediaFactory(media, photographer);
+    const mediaModel = new Media(media, photographer);
     const mediaDom = mediaModel.getMediaCardDom();
     portfolio.appendChild(mediaDom);
   });
@@ -50,6 +55,7 @@ const init = async () => {
   const photographerMedia = media.filter(
     (media) => media.photographerId == photographerId
   );
+  displayFilters(photographerMedia, currentPhotographer);
   displayMedia(photographerMedia, currentPhotographer);
 };
 
