@@ -30,20 +30,14 @@ const displayPhotographer = (photographer) => {
 };
 
 const displayFilters = (medias, photographer) => {
-  const mediaModel = new Media();
-  mediaModel.getSelectMenu();
+  const Sorter = new SorterForm(medias, photographer);
+  Sorter.render();
 };
 
 const displayMedia = (medias, photographer) => {
   const portfolio = document.querySelector(".portfolio");
   medias.forEach((media) => {
-    const mediaModel = new Media(
-      media.title,
-      media.image,
-      media.video,
-      media.likes,
-      photographer
-    );
+    const mediaModel = new Media(media, photographer);
     const mediaDom = mediaModel.getMediaCardDom();
     portfolio.appendChild(mediaDom);
   });

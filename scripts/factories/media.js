@@ -1,16 +1,16 @@
 class Media {
-  constructor(title, image, video, likes, photographer) {
-    this.image = image;
-    this.video = video;
-    this.likes = likes;
-    this.title = title;
-    this.photographer = photographer;
+  constructor(data, photographer) {
+    this._image = data.image;
+    this._video = data.video;
+    this._likes = data.likes;
+    this._title = data.title;
+    this._photographer = photographer;
   }
 
   getMediaPath() {
-    const photographerFirstName = this.photographer.name.split(" ")[0];
+    const photographerFirstName = this._photographer.name.split(" ")[0];
     const mediaFile = `assets/photos/${photographerFirstName}/${
-      this.image || this.video
+      this._image || this._video
     }`;
     return mediaFile;
   }
@@ -20,7 +20,7 @@ class Media {
     const article = document.createElement("article");
     // handle type of media
     let mediaElement = null;
-    this.image
+    this._image
       ? (mediaElement = document.createElement("img"))
       : (mediaElement = document.createElement("video"));
     const infoDiv = document.createElement("div");
@@ -30,15 +30,16 @@ class Media {
 
     // add attributes
     mediaElement.setAttribute("src", this.getMediaPath());
-    mediaElement.setAttribute("alt", this.title);
+    // TO DO : alt only on image
+    mediaElement.setAttribute("alt", this._title);
     infoDiv.classList.add("media-details");
     titleElement.classList.add("red-text");
     likesElement.classList.add("red-text", "likes");
     heartIcon.classList.add("fa-solid", "fa-heart");
 
     // add content
-    titleElement.textContent = this.title;
-    likesElement.textContent = `${this.likes} `;
+    titleElement.textContent = this._title;
+    likesElement.textContent = `${this._likes} `;
 
     // add element to DOM
     likesElement.appendChild(heartIcon);
@@ -48,56 +49,5 @@ class Media {
     article.appendChild(infoDiv);
 
     return article;
-  }
-
-  getSelectMenu() {
-    // get DOM elements
-    const selectElt = document.querySelector("select");
-    const selectDiv = document.querySelector(".custom-select");
-
-    // create new Select Div
-    const newSelect = document.createElement("div");
-    // set attibutes and classes
-    newSelect.classList.add("new-select");
-    // set content
-    newSelect.innerHTML = selectElt.options[selectElt.selectedIndex].innerHTML;
-    // add element to DOM
-    selectDiv.appendChild(newSelect);
-
-    // create menu and options elements
-    const newMenu = document.createElement("div");
-    newMenu.classList.add("select-items", "select-hide");
-
-    for (let option of selectElt.options) {
-      const newOption = document.createElement("div");
-      newOption.innerHTML = option.innerHTML;
-      // eventlistener on each option
-      newOption.addEventListener("click", (e) => {
-        // select right option
-        for (let option of selectElt.options) {
-          if (option.innerHTML === e.target.innerHTML) {
-            selectElt.selectedIndex = option.index;
-            // update top value with selected value
-            newSelect.innerHTML = e.target.innerHTML;
-            break;
-          }
-        }
-        // close select menu by faking a click
-        newSelect.click();
-      });
-      newMenu.appendChild(newOption);
-    }
-    // add newMenu to DOM
-    selectDiv.appendChild(newMenu);
-
-    // add eventListener on new select
-    newSelect.addEventListener("click", (e) => {
-      // prevent click propagation to childrens
-      e.stopPropagation();
-      // toggle menu on click
-      e.target.nextElementSibling.classList.toggle("select-hide");
-      // toggle active style
-      e.target.classList.toggle("active");
-    });
   }
 }

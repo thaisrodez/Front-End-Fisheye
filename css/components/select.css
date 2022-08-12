@@ -37,6 +37,9 @@
   cursor: pointer;
   display: flex;
   justify-content: space-between;
+  width: 140px;
+  border: none;
+  font-size: 18px;
 }
 
 .new-select.active {
@@ -48,12 +51,20 @@
   -webkit-transform: rotate(-90deg);
   -moz-transform: rotate(-90deg);
   transform: rotate(-90deg);
+  z-index: 15;
 }
 
 .new-select.active::after {
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
   transform: rotate(90deg);
+}
+
+.select-items {
+  position: absolute;
+  top: 0;
+  width: 140px;
+  border-radius: 5px;
 }
 
 .select-items div {
@@ -71,6 +82,10 @@
   height: 1px;
   width: 116px;
   border-bottom: 1px solid white;
+}
+
+.select-items div:first-child {
+  border-radius: 5px 5px 0px 0px;
 }
 
 .select-items div:last-child {
