@@ -49,13 +49,13 @@ class SorterForm {
     const newMenu = document.createElement("div");
     newMenu.classList.add("select-items", "select-hide");
     newMenu.setAttribute("role", "listbox");
-
     for (let option of this.$selectElt.options) {
       // create new menu options
       const newOption = document.createElement("div");
       newOption.innerHTML = option.innerHTML;
       newOption.setAttribute("role", "option");
       newOption.setAttribute("id", option.value);
+      newOption.setAttribute("tabindex", option.index.toString());
       // eventlistener on each option
       newOption.addEventListener("click", (e) => {
         // select right option
@@ -87,6 +87,9 @@ class SorterForm {
       // toggle active style
       e.target.classList.toggle("active");
       e.target.setAttribute("aria-expanded", "true");
+      for (let child of newMenu.children) {
+        child.focus();
+      }
     });
   }
 }
