@@ -25,7 +25,7 @@
         />
       </a>
     </header>
-    <main id="main">
+    <main id="main" aria-hidden="false">
       <div class="photograph-header">
         <button class="contact_button" onclick="displayModal()">
           Contactez-moi
@@ -45,11 +45,16 @@
         <div class="portfolio"></div>
       </section>
     </main>
-    <div id="contact_modal">
+    <div id="contact_modal" role="dialog" aria-hidden="true">
       <div class="modal">
         <header>
           <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <img
+            role="button"
+            src="assets/icons/close.svg"
+            id="close_button"
+            onclick="closeModal()"
+          />
         </header>
         <form>
           <div>
@@ -60,7 +65,6 @@
         </form>
       </div>
     </div>
-
     <!-- Factories -->
     <script src="scripts/factories/Photographer.js"></script>
     <script src="scripts/factories/media.js"></script>

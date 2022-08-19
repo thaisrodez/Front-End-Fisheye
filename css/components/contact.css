@@ -1,5 +1,12 @@
 #contact_modal {
   display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 48px;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
 }
 
 .contact_button {

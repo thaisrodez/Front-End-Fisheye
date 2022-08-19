@@ -1,9 +1,29 @@
+// class Contact {
+//   constructor() {}
+// }
+const mainWrapper = document.getElementById("main");
+const modal = document.getElementById("contact_modal");
+const closeButton = document.getElementById("close_button");
+
 function displayModal() {
-    const modal = document.getElementById("contact_modal");
-	modal.style.display = "block";
+  modal.style.display = "block";
+  // modal.setAttribute("aria-describedby");
+  // set aria attributes
+  mainWrapper.setAttribute("aria-hidden", "true");
+  modal.setAttribute("aria-hidden", "false");
+  closeButton.focus();
 }
 
 function closeModal() {
-    const modal = document.getElementById("contact_modal");
-    modal.style.display = "none";
+  modal.style.display = "none";
+  // set aria attributes
+  mainWrapper.setAttribute("aria-hidden", "false");
+  modal.setAttribute("aria-hidden", "true");
 }
+
+// close modal when press Escape
+document.addEventListener("keydown", (e) => {
+  if (modal.getAttribute("aria-hidden") === "false" && e.key === "Escape") {
+    closeModal();
+  }
+});
