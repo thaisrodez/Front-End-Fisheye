@@ -1,62 +1,59 @@
-// get current url and photographer Id
-const currentUrl = window.location.search;
-const urlParams = new URLSearchParams(currentUrl);
-const photographerId = urlParams.get("id");
+class PhotographerPage {
+  constructor() {
+    this.photographerApi = new PhotographerApi("data/photographers.json");
+    this.mediaApi = new MediaApi("data/photographers.json");
 
-// get photographers data
-const getPhotographers = async () => {
-  try {
-    const jsonFile = "./data/photographers.json";
-    const res = await fetch(jsonFile);
-    const data = await res.json();
-    const { photographers, media } = await data;
-
-    return { photographers, media };
-  } catch (error) {
-    console.log(error);
+    this.$photographerHeader = document.querySelector(".photograph-header");
+    this.$photographerMain = document.getElementById("main");
+    this.$portfolio = document.querySelector(".portfolio");
   }
-};
 
-const displayPhotographer = (photographer) => {
-  const photographerHeader = document.querySelector(".photograph-header");
-  const photographerMain = document.getElementById("main");
+  async getPhotographer() {
+    const photographersData = await this.photographerApi.getPhotographers();
+    const currentUrl = window.location.search;
+    const urlParams = new URLSearchParams(currentUrl);
+    const photographerId = urlParams.get("id");
 
-  const photographerInfo = photographerFactory(photographer);
-  const { nameDiv, img, insert } = photographerInfo.getPhotographerData();
-  // console.log(photographerHeaderDOM);
-  photographerHeader.prepend(nameDiv);
-  photographerHeader.appendChild(img);
-  photographerMain.appendChild(insert);
-};
+    const currentPhotographer = photographersData.find(
+      (photographer) => photographer.id == photographerId
+    );
+    return currentPhotographer;
+  }
 
-const displayFilters = (medias, photographer) => {
-  const Sorter = new SorterForm(medias, photographer);
-  Sorter.render();
-};
+  async getPhotographerMedias() {
+    const mediasData = await this.mediaApi.getMedias();
+    const photographer = await this.getPhotographer();
 
-const displayMedia = (medias, photographer) => {
-  const portfolio = document.querySelector(".portfolio");
-  medias.forEach((media) => {
-    const mediaModel = new Media(media, photographer);
-    const mediaDom = mediaModel.getMediaCardDom();
-    portfolio.appendChild(mediaDom);
-  });
-};
+    const photographerMedia = mediasData.filter(
+      (media) => media.photographerId == photographer.id
+    );
+    return photographerMedia;
+  }
 
-const init = async () => {
-  const { photographers, media } = await getPhotographers();
-  // photographer details
-  const currentPhotographer = photographers.find(
-    (photographer) => photographer.id == photographerId
-  );
-  displayPhotographer(currentPhotographer);
+  async main() {
+    const currentPhotographer = await this.getPhotographer();
+    const medias = await this.getPhotographerMedias();
 
-  // photographer media
-  const photographerMedia = media.filter(
-    (media) => media.photographerId == photographerId
-  );
-  displayFilters(photographerMedia, currentPhotographer);
-  displayMedia(photographerMedia, currentPhotographer);
-};
+    // insert photographer bio details
+    const photographerModel = new Photographer(currentPhotographer);
+    const { nameDiv, img, insert } =
+      photographerModel.getPhotographerHeaderDOM();
+    this.$photographerHeader.prepend(nameDiv);
+    this.$photographerHeader.appendChild(img);
+    this.$photographerMain.appendChild(insert);
 
-init();
+    // insert photographer medias
+    medias.forEach((media) => {
+      const mediaModel = new Media(media, currentPhotographer);
+      const mediaDom = mediaModel.getMediaCardDom();
+      this.$portfolio.appendChild(mediaDom);
+    });
+
+    // insert sorting button
+    const Sorter = new SorterForm(medias, currentPhotographer);
+    Sorter.render();
+  }
+}
+
+const photographerPage = new PhotographerPage();
+photographerPage.main();
