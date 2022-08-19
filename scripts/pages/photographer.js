@@ -9,22 +9,22 @@ class PhotographerPage {
   }
 
   async getPhotographer() {
-    const photographersData = await this.photographerApi.get();
+    const photographersData = await this.photographerApi.getPhotographers();
     const currentUrl = window.location.search;
     const urlParams = new URLSearchParams(currentUrl);
     const photographerId = urlParams.get("id");
 
-    const currentPhotographer = photographersData.photographers.find(
+    const currentPhotographer = photographersData.find(
       (photographer) => photographer.id == photographerId
     );
     return currentPhotographer;
   }
 
   async getPhotographerMedias() {
-    const mediasData = await this.mediaApi.get();
+    const mediasData = await this.mediaApi.getMedias();
     const photographer = await this.getPhotographer();
 
-    const photographerMedia = mediasData.media.filter(
+    const photographerMedia = mediasData.filter(
       (media) => media.photographerId == photographer.id
     );
     return photographerMedia;

@@ -9,10 +9,10 @@ class Home {
 
   async main() {
     // get photographers data
-    const photographersData = await this.photographerApi.get();
+    const photographersData = await this.photographerApi.getPhotographers();
 
     // display photographers data
-    photographersData.photographers.forEach((photographer) => {
+    photographersData.forEach((photographer) => {
       const photographerModel = new Photographer(photographer);
       const photographerCardDom = photographerModel.getUserCardDOM();
       this.$photographersSection.appendChild(photographerCardDom);
