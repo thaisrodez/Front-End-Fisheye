@@ -2,11 +2,24 @@ const mainWrapper = document.getElementById("main");
 const modal = document.getElementById("contact_modal");
 
 // get photographer name
+async function getPhotographer() {
+  const photographerApi = new PhotographerApi("data/photographers.json");
+  const photographersData = await photographerApi.getPhotographers();
+  const currentUrl = window.location.search;
+  const urlParams = new URLSearchParams(currentUrl);
+  const photographerId = urlParams.get("id");
 
-function displayModal() {
+  const currentPhotographer = photographersData.find(
+    (photographer) => photographer.id == photographerId
+  );
+  return currentPhotographer;
+}
+
+async function displayModal() {
+  const photographer = await getPhotographer();
   modal.style.display = "block";
-  // modal.setAttribute("aria-describedby"); need photographer name
   // set aria attributes
+  modal.setAttribute("aria-describedby", `Contactez-moi ${photographer.name}`);
   mainWrapper.setAttribute("aria-hidden", "true");
   modal.setAttribute("aria-hidden", "false");
   const closeButton = document.getElementById("close_button");

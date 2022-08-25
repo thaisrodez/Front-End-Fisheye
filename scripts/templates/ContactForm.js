@@ -8,6 +8,7 @@ class ContactForm {
     const formTitle = document.createElement("h2");
     const closeButton = document.createElement("img");
 
+    formTitle.setAttribute("id", "contact-form");
     closeButton.setAttribute("src", "assets/icons/close.svg");
     closeButton.setAttribute("role", "button");
     closeButton.setAttribute("tabindex", "0");
@@ -37,6 +38,8 @@ class ContactForm {
 
     // setAttributes
     form.setAttribute("method", "post");
+    formDiv.setAttribute("role", "group");
+    formDiv.setAttribute("aria-labelledby", "contact-form");
     // labels
     firstnameLabel.setAttribute("for", "firstname");
     lastnameLabel.setAttribute("for", "lastname");
@@ -57,10 +60,16 @@ class ContactForm {
     lastnameInput.setAttribute("type", "text");
     emailInput.setAttribute("type", "email");
     messageInput.setAttribute("rows", "8");
+    // input labelledby
+    firstnameInput.setAttribute("aria-labelledby", "firstname");
+    lastnameInput.setAttribute("aria-labelledby", "lastname");
+    emailInput.setAttribute("aria-labelledby", "email");
+    messageInput.setAttribute("aria-labelledby", "message");
 
     // button
     submitButton.classList.add("contact_button");
     submitButton.setAttribute("type", "submit");
+    // submitButton.setAttribute("onClick", "submit()");
 
     // text content
     firstnameLabel.textContent = "Prénom";
