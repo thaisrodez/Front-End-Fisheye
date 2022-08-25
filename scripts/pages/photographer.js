@@ -60,6 +60,8 @@ class PhotographerPage {
     const formBody = Form.getForm();
     this.$modal.appendChild(formHeader);
     this.$modal.appendChild(formBody);
+    // listen to form submission
+    formBody.addEventListener("submit", submit);
   }
 }
 

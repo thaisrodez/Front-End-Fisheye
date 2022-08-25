@@ -33,6 +33,23 @@ function closeModal() {
   modal.setAttribute("aria-hidden", "true");
 }
 
+function submit(event) {
+  event.preventDefault();
+  closeModal();
+  const data = new FormData();
+  data.append("firstname", document.getElementById("firstname").value);
+  data.append("lastname", document.getElementById("lastname").value);
+  data.append("email", document.getElementById("email").value);
+  data.append("message", document.getElementById("message").value);
+  const result = {
+    firstname: data.get("firstname"),
+    lastname: data.get("lastname"),
+    email: data.get("email"),
+    message: data.get("message"),
+  };
+  console.log(result);
+}
+
 // close modal when press Escape
 document.addEventListener("keydown", (e) => {
   if (modal.getAttribute("aria-hidden") === "false" && e.key === "Escape") {
