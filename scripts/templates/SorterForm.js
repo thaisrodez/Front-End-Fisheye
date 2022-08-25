@@ -45,12 +45,12 @@ class SorterForm {
     // add element to DOM
     this.$selectDiv.appendChild(this.$newSelect);
 
-    // create new menu
+    // create custom select
     const newMenu = document.createElement("div");
     newMenu.classList.add("select-items", "select-hide");
     newMenu.setAttribute("role", "listbox");
     for (let option of this.$selectElt.options) {
-      // create new menu options
+      // create custom select options
       const newOption = document.createElement("div");
       newOption.innerHTML = option.innerHTML;
       newOption.setAttribute("role", "option");
@@ -75,7 +75,7 @@ class SorterForm {
       });
       newMenu.appendChild(newOption);
     }
-    // add newMenu to DOM
+    // add custom select to DOM
     this.$selectDiv.appendChild(newMenu);
 
     // display new menu on click
