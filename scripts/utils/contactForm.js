@@ -1,16 +1,15 @@
-// class Contact {
-//   constructor() {}
-// }
 const mainWrapper = document.getElementById("main");
 const modal = document.getElementById("contact_modal");
-const closeButton = document.getElementById("close_button");
+
+// get photographer name
 
 function displayModal() {
   modal.style.display = "block";
-  // modal.setAttribute("aria-describedby");
+  // modal.setAttribute("aria-describedby"); need photographer name
   // set aria attributes
   mainWrapper.setAttribute("aria-hidden", "true");
   modal.setAttribute("aria-hidden", "false");
+  const closeButton = document.getElementById("close_button");
   closeButton.focus();
 }
 
