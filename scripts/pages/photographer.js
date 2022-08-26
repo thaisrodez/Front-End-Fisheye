@@ -45,7 +45,9 @@ class PhotographerPage {
 
     // insert photographer medias
     medias.forEach((media) => {
-      const mediaModel = new Media(media, currentPhotographer);
+      const mediaModel = mediaWithLightbox(
+        new Media(media, currentPhotographer)
+      );
       const mediaDom = mediaModel.getMediaCardDom();
       this.$portfolio.appendChild(mediaDom);
     });
