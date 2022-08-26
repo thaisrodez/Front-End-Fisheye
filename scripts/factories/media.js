@@ -5,6 +5,8 @@ class Media {
     this._likes = data.likes;
     this._title = data.title;
     this._photographer = photographer;
+
+    this.$article = document.createElement("article");
   }
 
   getMediaPath() {
@@ -17,7 +19,6 @@ class Media {
 
   getMediaCardDom() {
     // DOM elements
-    const article = document.createElement("article");
     // handle type of media
     let mediaElement = null;
     this._image
@@ -30,8 +31,7 @@ class Media {
 
     // add attributes
     mediaElement.setAttribute("src", this.getMediaPath());
-    // TO DO : alt only on image
-    mediaElement.setAttribute("alt", this._title);
+    this._image ? mediaElement.setAttribute("alt", this._title) : null;
     infoDiv.classList.add("media-details");
     titleElement.classList.add("red-text");
     likesElement.classList.add("red-text", "likes");
@@ -45,9 +45,9 @@ class Media {
     likesElement.appendChild(heartIcon);
     infoDiv.appendChild(titleElement);
     infoDiv.appendChild(likesElement);
-    article.appendChild(mediaElement);
-    article.appendChild(infoDiv);
+    this.$article.appendChild(mediaElement);
+    this.$article.appendChild(infoDiv);
 
-    return article;
+    return this.$article;
   }
 }
