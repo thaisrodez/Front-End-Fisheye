@@ -1,3 +1,7 @@
 .media-elements {
   margin: 0 100px;
 }
+
+.no-scroll {
+  overflow: hidden;
+}
