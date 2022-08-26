@@ -1,3 +1,5 @@
+/* eslint-disable default-case */
+/* eslint-disable no-console */
 class LightBox {
   constructor(media) {
     this._image = media._image;
@@ -11,13 +13,49 @@ class LightBox {
 
     this.$lightboxModal = document.getElementById("lightbox_modal");
     this.$mainWrapper = document.getElementById("main");
+    this.$body = document.querySelector("body");
+  }
+
+  closeModal() {
+    this.$lightboxModal.style.display = "none";
+    this.$mainWrapper.setAttribute("aria-hidden", "false");
+    this.$lightboxModal.setAttribute("aria-hidden", "true");
+    this.$body.classList.remove("no-scroll");
   }
 
   onCloseButton() {
     document.getElementById("close_lightbox").addEventListener("click", () => {
-      this.$lightboxModal.style.display = "none";
-      this.$mainWrapper.setAttribute("aria-hidden", "false");
-      this.$lightboxModal.setAttribute("aria-hidden", "true");
+      this.closeModal();
+    });
+  }
+
+  onPreviousButton() {
+    document.getElementById("previous-media").addEventListener("click", () => {
+      console.log("previous");
+    });
+  }
+
+  onNextButton() {
+    document.getElementById("next-media").addEventListener("click", () => {
+      console.log("next");
+    });
+  }
+
+  onKeyboardPress() {
+    document.addEventListener("keydown", (e) => {
+      if (this.$lightboxModal.getAttribute("aria-hidden") === "false") {
+        switch (e.key) {
+          case "Escape":
+            this.closeModal();
+            break;
+          case "ArrowRight":
+            console.log("next");
+            break;
+          case "ArrowLeft":
+            console.log("previous");
+            break;
+        }
+      }
     });
   }
 
@@ -46,6 +84,8 @@ class LightBox {
       ? mediaElement.setAttribute("alt", this._title)
       : mediaElement.setAttribute("controls", "");
 
+    previous.setAttribute("id", "previous-media");
+    next.setAttribute("id", "next-media");
     previous.setAttribute("aria-label", "image suivante");
     next.setAttribute("aria-label", "image précédente");
 
@@ -77,9 +117,13 @@ class LightBox {
     this.$lightboxModal.style.display = "block";
     this.$mainWrapper.setAttribute("aria-hidden", "true");
     this.$lightboxModal.setAttribute("aria-hidden", "false");
+    this.$body.classList.add("no-scroll");
 
-    // close modal
+    // navigate modal
     this.onCloseButton();
+    this.onPreviousButton();
+    this.onNextButton();
+    this.onKeyboardPress();
   }
 
   render() {

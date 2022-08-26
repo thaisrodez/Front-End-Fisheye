@@ -2,6 +2,7 @@ class PhotographerPage {
   constructor() {
     this.photographerApi = new PhotographerApi("data/photographers.json");
     this.mediaApi = new MediaApi("data/photographers.json");
+    console.log(this.photographerApi);
 
     this.$photographerHeader = document.querySelector(".photograph-header");
     this.$photographerMain = document.getElementById("main");
@@ -16,17 +17,18 @@ class PhotographerPage {
     const photographerId = urlParams.get("id");
 
     const currentPhotographer = photographersData.find(
-      (photographer) => photographer.id == photographerId
+      (photographer) => photographer.id === photographerId
     );
     return currentPhotographer;
   }
 
   async getPhotographerMedias() {
     const mediasData = await this.mediaApi.getMedias();
-    const photographer = await this.getPhotographer();
+    const photographer = await this.photographerApi.getPhotographer();
 
+    console.log(photographer);
     const photographerMedia = mediasData.filter(
-      (media) => media.photographerId == photographer.id
+      (media) => media.photographerId === photographer.id
     );
     return photographerMedia;
   }
@@ -44,7 +46,7 @@ class PhotographerPage {
     this.$photographerMain.appendChild(insert);
 
     // insert photographer medias
-    medias.forEach((media) => {
+    medias.forEach((media, index) => {
       const mediaModel = mediaWithLightbox(
         new Media(media, currentPhotographer)
       );
