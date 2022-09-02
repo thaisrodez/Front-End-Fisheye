@@ -21,8 +21,8 @@ class LightBox {
       ? (mediaElement = document.createElement("img"))
       : (mediaElement = document.createElement("video"));
     const mediaTitle = document.createElement("p");
-    const previous = document.createElement("a");
-    const next = document.createElement("a");
+    const previous = document.createElement("button");
+    const next = document.createElement("button");
 
     // set attributes
     closeButton.setAttribute("id", "close_lightbox");
