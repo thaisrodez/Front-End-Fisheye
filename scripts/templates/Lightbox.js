@@ -1,5 +1,3 @@
-/* eslint-disable default-case */
-/* eslint-disable no-console */
 class LightBox {
   constructor(media) {
     this._image = media._image;
