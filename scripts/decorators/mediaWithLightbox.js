@@ -1,3 +1,5 @@
+/*global LightBox*/
+
 function mediaWithLightbox(media) {
   media.$article.addEventListener("click", (e) => {
     e.preventDefault();

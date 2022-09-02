@@ -1,3 +1,5 @@
+/* global Sorter, Media*/
+
 class SorterForm {
   constructor(Medias, photographer) {
     this.medias = Medias;
