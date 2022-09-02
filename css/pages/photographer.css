@@ -5,3 +5,11 @@
 .no-scroll {
   overflow: hidden;
 }
+
+.hide-modal {
+  display: none;
+}
+
+.show-modal {
+  display: block;
+}
