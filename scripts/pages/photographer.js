@@ -1,4 +1,4 @@
-/*global PhotographerApi, MediaApi, Photographer, mediaWithLightbox, Media, SorterForm*/
+/*global PhotographerApi, MediaApi, Photographer, HandleLightbox, LightBox, Media, SorterForm*/
 
 class PhotographerPage {
   constructor() {
@@ -47,11 +47,17 @@ class PhotographerPage {
 
     // insert photographer medias
     medias.forEach((media, index) => {
-      const mediaModel = mediaWithLightbox(
-        new Media(media, currentPhotographer)
-      );
+      const mediaModel = new Media(media, currentPhotographer);
       const mediaDom = mediaModel.getMediaCardDom();
       this.$portfolio.appendChild(mediaDom);
+    });
+
+    const handleLightBox = new HandleLightbox(medias, currentPhotographer);
+    document.querySelectorAll(".portfolio article img").forEach((mediaDom) => {
+      mediaDom.addEventListener("click", (e) => {
+        // get element throught dataset
+        handleLightBox.show(e.target.dataset.id);
+      });
     });
 
     // insert sorting button

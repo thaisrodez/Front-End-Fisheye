@@ -4,6 +4,7 @@ class Media {
     this._video = data.video;
     this._likes = data.likes;
     this._title = data.title;
+    this._id = data.id;
     this._photographer = photographer;
 
     this.$article = document.createElement("article");
@@ -29,6 +30,8 @@ class Media {
     const likesElement = document.createElement("p");
     const heartIcon = document.createElement("i");
 
+    // data set
+    mediaElement.setAttribute("data-id", this._id);
     // add attributes
     mediaElement.setAttribute("src", this.getMediaPath());
     this._image ? mediaElement.setAttribute("alt", this._title) : null;
