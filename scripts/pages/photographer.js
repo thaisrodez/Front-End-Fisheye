@@ -3,6 +3,8 @@ class PhotographerPage {
     this.photographerApi = new PhotographerApi("data/photographers.json");
     this.mediaApi = new MediaApi("data/photographers.json");
 
+    this.totalLikes = 0;
+
     this.$photographerHeader = document.querySelector(".photograph-header");
     this.$photographerMain = document.getElementById("main");
     this.$portfolio = document.querySelector(".portfolio");
@@ -34,20 +36,30 @@ class PhotographerPage {
     const currentPhotographer = await this.getPhotographer();
     const medias = await this.getPhotographerMedias();
 
+    let totalLikesArray = [];
+
+    // insert photographer medias
+    medias.forEach((media) => {
+      totalLikesArray.push(media.likes);
+      const mediaModel = new Media(media, currentPhotographer);
+      const mediaDom = mediaModel.getMediaCardDom();
+      this.$portfolio.appendChild(mediaDom);
+    });
+
+    // get total Likes
+    this.totalLikes = totalLikesArray.reduce((a, b) => a + b);
+
     // insert photographer bio details
-    const photographerModel = new Photographer(currentPhotographer);
+    const photographerModel = new Photographer(
+      currentPhotographer,
+      this.totalLikes
+    );
+
     const { nameDiv, img, insert } =
       photographerModel.getPhotographerHeaderDOM();
     this.$photographerHeader.prepend(nameDiv);
     this.$photographerHeader.appendChild(img);
     this.$photographerMain.appendChild(insert);
-
-    // insert photographer medias
-    medias.forEach((media) => {
-      const mediaModel = new Media(media, currentPhotographer);
-      const mediaDom = mediaModel.getMediaCardDom();
-      this.$portfolio.appendChild(mediaDom);
-    });
 
     // insert sorting button
     const Sorter = new SorterForm(medias, currentPhotographer);
