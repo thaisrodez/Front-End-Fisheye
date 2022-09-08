@@ -31,6 +31,7 @@ class Media {
     // add attributes
     mediaElement.setAttribute("src", this.getMediaPath());
     heartIcon.setAttribute("aria-label", "likes");
+    heartIcon.setAttribute("tabindex", "4");
 
     // TO DO : alt only on image
     mediaElement.setAttribute("alt", this._title);
