@@ -30,16 +30,19 @@ class Media {
 
     // add attributes
     mediaElement.setAttribute("src", this.getMediaPath());
+    heartIcon.setAttribute("aria-label", "likes");
+
     // TO DO : alt only on image
     mediaElement.setAttribute("alt", this._title);
     infoDiv.classList.add("media-details");
     titleElement.classList.add("red-text");
     likesElement.classList.add("red-text", "likes");
-    heartIcon.classList.add("fa-solid", "fa-heart");
+    heartIcon.classList.add("like-btn");
+    heartIcon.classList.add("fa-regular", "fa-heart");
 
     // add content
     titleElement.textContent = this._title;
-    likesElement.textContent = `${this._likes} `;
+    likesElement.textContent = this._likes;
 
     // add element to DOM
     likesElement.appendChild(heartIcon);
