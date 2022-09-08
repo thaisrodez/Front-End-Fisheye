@@ -39,6 +39,10 @@ class Media {
       ? mediaElement.setAttribute("alt", this._title)
       : mediaElement.setAttribute("aria-label", this._title);
     mediaElement.classList.add("media-object");
+
+    heartIcon.setAttribute("aria-label", "likes");
+    heartIcon.setAttribute("tabindex", "4");
+
     infoDiv.classList.add("media-details");
     titleElement.classList.add("red-text");
     likesElement.classList.add("red-text", "likes");
