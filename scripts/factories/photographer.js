@@ -57,9 +57,11 @@ class Photographer {
     const img = document.createElement("img");
 
     // price and likes insert
-    const insert = document.createElement("dic");
+    const insert = document.createElement("div");
     const priceElement = document.createElement("p");
     const likesElement = document.createElement("p");
+    const likesCount = document.createElement("span");
+    const heartIcon = document.createElement("i");
 
     // set attributes
     cityElement.classList.add("red-text");
@@ -67,6 +69,9 @@ class Photographer {
     img.setAttribute("src", this._picture);
     img.setAttribute("alt", this._name);
     img.classList.add("photographer_img");
+    heartIcon.classList.add("fa-solid", "fa-heart");
+    likesCount.setAttribute("id", "likes-count");
+    likesElement.classList.add("likes");
     insert.classList.add("insert");
 
     // text content
@@ -74,9 +79,11 @@ class Photographer {
     cityElement.textContent = `${this._city}, ${this._country}`;
     taglineElement.textContent = this._tagline;
     priceElement.textContent = `${this._price}€ / jour`;
-    likesElement.innerHTML = `<p>${this._totalLikes} <i class="fa-solid fa-heart"></i></p>`;
+    likesCount.textContent = this._totalLikes;
 
     // add element in DOM
+    likesElement.appendChild(likesCount);
+    likesElement.appendChild(heartIcon);
     nameDiv.appendChild(nameTitle);
     nameDiv.appendChild(cityElement);
     nameDiv.appendChild(taglineElement);
