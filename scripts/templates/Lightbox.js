@@ -1,3 +1,5 @@
+/* global Media*/
+
 class LightBox {
   constructor(media, currentPhotographer) {
     this._image = media.image;

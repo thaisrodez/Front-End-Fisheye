@@ -32,6 +32,9 @@ class Media {
 
     // data set
     mediaElement.setAttribute("data-id", this._id);
+    // media focusable
+    mediaElement.setAttribute("tabindex", 3);
+
     // add attributes
     mediaElement.setAttribute("src", this.getMediaPath());
     this._image ? mediaElement.setAttribute("alt", this._title) : null;
