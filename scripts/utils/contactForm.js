@@ -24,6 +24,7 @@ async function displayModal() {
   modal.setAttribute("aria-hidden", "false");
   const closeButton = document.getElementById("close_button");
   closeButton.focus();
+  handleKeyboardClose();
 }
 
 function closeModal() {
@@ -56,3 +57,12 @@ document.addEventListener("keydown", (e) => {
     closeModal();
   }
 });
+
+// close modal when press Enter on close Btn
+const handleKeyboardClose = () => {
+  document.getElementById("close_button").addEventListener("keydown", (e) => {
+    if (modal.getAttribute("aria-hidden") === "false" && e.key === "Enter") {
+      closeModal();
+    }
+  });
+};
