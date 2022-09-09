@@ -8,7 +8,8 @@ class PhotographerPage {
     this.$photographerHeader = document.querySelector(".photograph-header");
     this.$photographerMain = document.getElementById("main");
     this.$portfolio = document.querySelector(".portfolio");
-    this.$modal = document.querySelector(".modal");
+    this.$contactModal = document.querySelector(".modal");
+    this.$lightboxModal = document.getElementById("lightbox_modal");
   }
 
   async getPhotographer() {
@@ -58,6 +59,14 @@ class PhotographerPage {
         // get element throught dataset
         handleLightBox.show(e.target.dataset.id);
       });
+      mediaDom.addEventListener("keydown", (e) => {
+        if (
+          this.$lightboxModal.getAttribute("aria-hidden") === "true" &&
+          e.key === "Enter"
+        ) {
+          handleLightBox.show(e.target.dataset.id);
+        }
+      });
     });
 
     // insert sorting button
@@ -68,8 +77,8 @@ class PhotographerPage {
     const Form = new ContactForm(currentPhotographer);
     const formHeader = Form.getHeader();
     const formBody = Form.getForm();
-    this.$modal.appendChild(formHeader);
-    this.$modal.appendChild(formBody);
+    this.$contactModal.appendChild(formHeader);
+    this.$contactModal.appendChild(formBody);
     // listen to form submission
     formBody.addEventListener("submit", submit);
   }
