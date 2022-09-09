@@ -42,7 +42,7 @@ class Media {
     infoDiv.classList.add("media-details");
     titleElement.classList.add("red-text");
     likesElement.classList.add("red-text", "likes");
-    heartIcon.setAttribute("tabindex", "4");
+    heartIcon.setAttribute("tabindex", "3");
     heartIcon.setAttribute("aria-label", "likes");
     heartIcon.classList.add("like-btn");
     heartIcon.classList.add("fa-regular", "fa-heart");

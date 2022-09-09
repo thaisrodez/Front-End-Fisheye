@@ -34,10 +34,26 @@ class SorterForm {
     this.$portfolio.innerHTML = "";
   }
 
+  selectOption(e, newOption, newMenu) {
+    for (let option of this.$selectElt.options) {
+      if (option.innerHTML === e.target.innerHTML) {
+        newMenu.setAttribute("aria-activedescendant", newOption.id);
+        this.sortMedias(option.value);
+        this.$selectElt.selectedIndex = option.index;
+        // update top value with selected value
+        this.$newSelect.innerHTML = e.target.innerHTML;
+        break;
+      }
+    }
+    // close select menu by faking a click
+    this.$newSelect.click();
+    this.$newSelect.setAttribute("aria-expanded", "false");
+  }
+
   render() {
     // set attibutes and classes
     this.$newSelect.classList.add("new-select");
-    // this.$newSelect.setAttribute("role", "button");
+    this.$newSelect.setAttribute("role", "button");
     this.$newSelect.setAttribute("aria-haspopup", "listbox");
     this.$newSelect.setAttribute("aria-labelledby", "filter-label");
 
@@ -57,23 +73,21 @@ class SorterForm {
       newOption.innerHTML = option.innerHTML;
       newOption.setAttribute("role", "option");
       newOption.setAttribute("id", option.value);
-      newOption.setAttribute("tabindex", option.index.toString());
-      // eventlistener on each option
+      newOption.setAttribute("tabindex", "1");
+
+      // listen to click on each option
       newOption.addEventListener("click", (e) => {
         // select right option
-        for (let option of this.$selectElt.options) {
-          if (option.innerHTML === e.target.innerHTML) {
-            newMenu.setAttribute("aria-activedescendant", newOption.id);
-            this.sortMedias(option.value);
-            this.$selectElt.selectedIndex = option.index;
-            // update top value with selected value
-            this.$newSelect.innerHTML = e.target.innerHTML;
-            break;
-          }
+        this.selectOption(e, newOption, newMenu);
+      });
+      // listen to keyboard on each option
+      newOption.addEventListener("keydown", (e) => {
+        if (
+          this.$newSelect.getAttribute("aria-expanded") === "true" &&
+          e.key === "Enter"
+        ) {
+          this.selectOption(e, newOption, newMenu);
         }
-        // close select menu by faking a click
-        this.$newSelect.click();
-        this.$newSelect.setAttribute("aria-expanded", "false");
       });
       newMenu.appendChild(newOption);
     }
@@ -89,9 +103,6 @@ class SorterForm {
       // toggle active style
       e.target.classList.toggle("active");
       e.target.setAttribute("aria-expanded", "true");
-      for (let child of newMenu.children) {
-        child.focus();
-      }
     });
   }
 }
