@@ -1,5 +1,4 @@
 #lightbox_modal {
-  display: none;
   height: 100vh;
   background-color: #E5E5E5;
   position: fixed;
@@ -10,8 +9,6 @@
 #close_lightbox {
   position: absolute;
   top: 0;
-  border: none;
-  background: none;
 }
 
 .lightbox {
@@ -33,4 +30,6 @@
 
 .lightbox-navigation {
   font-size: 54px;
+  border: none;
+  background: none;
 }
