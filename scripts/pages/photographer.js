@@ -6,6 +6,7 @@ class PhotographerPage {
     this.$photographerHeader = document.querySelector(".photograph-header");
     this.$photographerMain = document.getElementById("main");
     this.$portfolio = document.querySelector(".portfolio");
+    this.$modal = document.querySelector(".modal");
   }
 
   async getPhotographer() {
@@ -52,6 +53,15 @@ class PhotographerPage {
     // insert sorting button
     const Sorter = new SorterForm(medias, currentPhotographer);
     Sorter.render();
+
+    // insert contact form
+    const Form = new ContactForm(currentPhotographer);
+    const formHeader = Form.getHeader();
+    const formBody = Form.getForm();
+    this.$modal.appendChild(formHeader);
+    this.$modal.appendChild(formBody);
+    // listen to form submission
+    formBody.addEventListener("submit", submit);
   }
 }
 

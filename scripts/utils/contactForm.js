@@ -1,9 +1,68 @@
-function displayModal() {
-    const modal = document.getElementById("contact_modal");
-	modal.style.display = "block";
+const mainWrapper = document.getElementById("main");
+const modal = document.getElementById("contact_modal");
+
+// get photographer name
+async function getPhotographer() {
+  const photographerApi = new PhotographerApi("data/photographers.json");
+  const photographersData = await photographerApi.getPhotographers();
+  const currentUrl = window.location.search;
+  const urlParams = new URLSearchParams(currentUrl);
+  const photographerId = urlParams.get("id");
+
+  const currentPhotographer = photographersData.find(
+    (photographer) => photographer.id == photographerId
+  );
+  return currentPhotographer;
+}
+
+async function displayModal() {
+  const photographer = await getPhotographer();
+  modal.style.display = "block";
+  // set aria attributes
+  modal.setAttribute("aria-describedby", `Contactez-moi ${photographer.name}`);
+  mainWrapper.setAttribute("aria-hidden", "true");
+  modal.setAttribute("aria-hidden", "false");
+  const closeButton = document.getElementById("close_button");
+  closeButton.focus();
+  handleKeyboardClose();
 }
 
 function closeModal() {
-    const modal = document.getElementById("contact_modal");
-    modal.style.display = "none";
+  modal.style.display = "none";
+  // set aria attributes
+  mainWrapper.setAttribute("aria-hidden", "false");
+  modal.setAttribute("aria-hidden", "true");
 }
+
+function submit(event) {
+  event.preventDefault();
+  closeModal();
+  const data = new FormData();
+  data.append("firstname", document.getElementById("firstname").value);
+  data.append("lastname", document.getElementById("lastname").value);
+  data.append("email", document.getElementById("email").value);
+  data.append("message", document.getElementById("message").value);
+  const result = {
+    firstname: data.get("firstname"),
+    lastname: data.get("lastname"),
+    email: data.get("email"),
+    message: data.get("message"),
+  };
+  console.log(result);
+}
+
+// close modal when press Escape
+document.addEventListener("keydown", (e) => {
+  if (modal.getAttribute("aria-hidden") === "false" && e.key === "Escape") {
+    closeModal();
+  }
+});
+
+// close modal when press Enter on close Btn
+const handleKeyboardClose = () => {
+  document.getElementById("close_button").addEventListener("keydown", (e) => {
+    if (modal.getAttribute("aria-hidden") === "false" && e.key === "Enter") {
+      closeModal();
+    }
+  });
+};
