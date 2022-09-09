@@ -1,3 +1,5 @@
+/* global PhotographerApi, MediaApi, Photographer, Sorter, SorterForm, HandleLightbox, Media, ContactForm, submit*/
+
 class PhotographerPage {
   constructor() {
     this.photographerApi = new PhotographerApi("data/photographers.json");
@@ -6,7 +8,8 @@ class PhotographerPage {
     this.$photographerHeader = document.querySelector(".photograph-header");
     this.$photographerMain = document.getElementById("main");
     this.$portfolio = document.querySelector(".portfolio");
-    this.$modal = document.querySelector(".modal");
+    this.$contactModal = document.querySelector(".modal");
+    this.$lightboxModal = document.getElementById("lightbox_modal");
   }
 
   async getPhotographer() {
@@ -44,17 +47,25 @@ class PhotographerPage {
     this.$photographerMain.appendChild(insert);
 
     // insert photographer medias
-    medias.forEach((media, index) => {
+    medias.forEach((media) => {
       const mediaModel = new Media(media, currentPhotographer);
       const mediaDom = mediaModel.getMediaCardDom();
       this.$portfolio.appendChild(mediaDom);
     });
 
     const handleLightBox = new HandleLightbox(medias, currentPhotographer);
-    document.querySelectorAll(".portfolio article img").forEach((mediaDom) => {
+    document.querySelectorAll(".media-object").forEach((mediaDom) => {
       mediaDom.addEventListener("click", (e) => {
         // get element throught dataset
         handleLightBox.show(e.target.dataset.id);
+      });
+      mediaDom.addEventListener("keydown", (e) => {
+        if (
+          this.$lightboxModal.getAttribute("aria-hidden") === "true" &&
+          e.key === "Enter"
+        ) {
+          handleLightBox.show(e.target.dataset.id);
+        }
       });
     });
 
@@ -66,8 +77,8 @@ class PhotographerPage {
     const Form = new ContactForm(currentPhotographer);
     const formHeader = Form.getHeader();
     const formBody = Form.getForm();
-    this.$modal.appendChild(formHeader);
-    this.$modal.appendChild(formBody);
+    this.$contactModal.appendChild(formHeader);
+    this.$contactModal.appendChild(formBody);
     // listen to form submission
     formBody.addEventListener("submit", submit);
   }

@@ -1,3 +1,5 @@
+/* global LightBox*/
+
 class HandleLightbox {
   constructor(mediasArray, currentPhotographer) {
     this.currentMedia = null;

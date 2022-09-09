@@ -1,3 +1,5 @@
+/* global Media*/
+
 class LightBox {
   constructor(media, currentPhotographer) {
     this._image = media.image;
@@ -50,6 +52,8 @@ class LightBox {
     closeButton.innerHTML = "<i class='fa-solid fa-xmark'></i>";
     previous.innerHTML = "<i class='fa-solid fa-chevron-left'></i>";
     next.innerHTML = "<i class='fa-solid fa-chevron-right'></i>";
+
+    closeButton.focus();
 
     // insert element in DOM$
     leftDiv.appendChild(previous);

@@ -34,7 +34,9 @@ class Media {
     mediaElement.setAttribute("data-id", this._id);
     // add attributes
     mediaElement.setAttribute("src", this.getMediaPath());
+    mediaElement.setAttribute("tabindex", "3");
     this._image ? mediaElement.setAttribute("alt", this._title) : null;
+    mediaElement.classList.add("media-object");
     infoDiv.classList.add("media-details");
     titleElement.classList.add("red-text");
     likesElement.classList.add("red-text", "likes");
