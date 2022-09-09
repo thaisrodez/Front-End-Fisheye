@@ -1,3 +1,5 @@
+/* global PhotographerApi */
+
 const mainWrapper = document.getElementById("main");
 const modal = document.getElementById("contact_modal");
 

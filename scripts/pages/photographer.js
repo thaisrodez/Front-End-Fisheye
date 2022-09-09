@@ -1,4 +1,4 @@
-/*global PhotographerApi, MediaApi, Photographer, HandleLightbox, LightBox, Media, SorterForm*/
+/*global PhotographerApi, MediaApi, Photographer, HandleLightbox, LightBox, Media, SorterForm, ContactForm, submit*/
 
 class PhotographerPage {
   constructor() {
