@@ -11,7 +11,7 @@ class Photographer {
     this._hrefPhotographer = `./photographer.html?id=${this._id}`;
   }
 
-  getUserCardDOM = () => {
+  getUserCardDOM() {
     // photographer DOM element
     const article = document.createElement("article");
     const link = document.createElement("a");
@@ -44,9 +44,9 @@ class Photographer {
     article.appendChild(quote);
     article.appendChild(photographerPrice);
     return article;
-  };
+  }
 
-  getPhotographerHeaderDOM = () => {
+  getPhotographerHeaderDOM() {
     // DOM elements
     // header infos
     const nameDiv = document.createElement("div");
@@ -79,5 +79,5 @@ class Photographer {
     nameDiv.appendChild(taglineElement);
     insert.appendChild(priceElement);
     return { nameDiv, img, insert };
-  };
+  }
 }

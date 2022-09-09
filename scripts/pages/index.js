@@ -1,3 +1,5 @@
+/*global PhotographerApi, Photographer*/
+
 class Home {
   constructor() {
     this.photographerApi = new PhotographerApi("data/photographers.json");

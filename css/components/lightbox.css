@@ -1,0 +1,35 @@
+#lightbox_modal {
+  height: 100vh;
+  background-color: #E5E5E5;
+  position: fixed;
+  top: 0;
+  z-index: 20;
+}
+
+#close_lightbox {
+  position: absolute;
+  top: 0;
+}
+
+.lightbox {
+  width: 100vw;
+  margin: 62px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  position: relative
+}
+
+.lightbox-media {
+  width: 100%;
+  max-width: 900px;
+  height: 570px;
+  object-fit: cover;
+}
+
+.lightbox-navigation {
+  font-size: 54px;
+  border: none;
+  background: none;
+}

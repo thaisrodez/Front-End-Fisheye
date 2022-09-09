@@ -1,3 +1,15 @@
 .media-elements {
   margin: 0 100px;
 }
+
+.no-scroll {
+  overflow: hidden;
+}
+
+.hide-modal {
+  display: none;
+}
+
+.show-modal {
+  display: block;
+}

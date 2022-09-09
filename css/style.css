@@ -5,6 +5,7 @@
 @import url("components/contact.css");
 @import url("components/header.css");
 @import url("components/insert.css");
+@import url("components/lightbox.css");
 
 body {
   font-family: "DM Sans", sans-serif;

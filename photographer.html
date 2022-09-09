@@ -3,7 +3,7 @@
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8" />
-    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <!-- <link rel="icon" type="image/png" href="assets/favicon.png" /> -->
     <link
       href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
       rel="stylesheet"
@@ -45,19 +45,30 @@
         <div class="portfolio"></div>
       </section>
     </main>
-    <div id="contact_modal" role="dialog" aria-hidden="true">
-      <div class="modal"></div>
+    <div id="contact_modal">
+      <div class="modal">
+        </form>
+      </div>
     </div>
-    <!-- Api -->
-    <script src="scripts/api/Api.js"></script>
+    <div
+      id="lightbox_modal"
+      role="dialog"
+      aria-hidden="true"
+      aria-label="image closeup view"
+    ></div>
+
     <!-- Factories -->
     <script src="scripts/factories/Photographer.js"></script>
     <script src="scripts/factories/media.js"></script>
     <!-- Templates -->
     <script src="/scripts/templates/SorterForm.js"></script>
     <script src="/scripts/templates/ContactForm.js"></script>
+    <script src="/scripts/templates/Lightbox.js"></script>
+    <!-- Api -->
+    <script src="scripts/api/Api.js"></script>
     <!-- Utils -->
     <script src="/scripts/utils/contactForm.js"></script>
+    <script src="/scripts/utils/HandleLightbox.js"></script>
     <script src="/scripts/utils/Sorter.js"></script>
     <!-- Pages -->
     <script src="scripts/pages/photographer.js"></script>
