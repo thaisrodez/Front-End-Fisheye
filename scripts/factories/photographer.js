@@ -1,5 +1,5 @@
 class Photographer {
-  constructor(data) {
+  constructor(data, totalLikes) {
     this._id = data.id;
     this._name = data.name;
     this._portrait = data.portrait;
@@ -9,6 +9,7 @@ class Photographer {
     this._price = data.price;
     this._picture = `assets/photographers/${this._portrait}`;
     this._hrefPhotographer = `./photographer.html?id=${this._id}`;
+    this._totalLikes = totalLikes;
   }
 
   getUserCardDOM() {
@@ -56,8 +57,11 @@ class Photographer {
     const img = document.createElement("img");
 
     // price and likes insert
-    const insert = document.createElement("dic");
+    const insert = document.createElement("div");
     const priceElement = document.createElement("p");
+    const likesElement = document.createElement("p");
+    const likesCount = document.createElement("span");
+    const heartIcon = document.createElement("i");
 
     // set attributes
     cityElement.classList.add("red-text");
@@ -65,6 +69,9 @@ class Photographer {
     img.setAttribute("src", this._picture);
     img.setAttribute("alt", this._name);
     img.classList.add("photographer_img");
+    heartIcon.classList.add("fa-solid", "fa-heart");
+    likesCount.setAttribute("id", "likes-count");
+    likesElement.classList.add("likes");
     insert.classList.add("insert");
 
     // text content
@@ -72,11 +79,15 @@ class Photographer {
     cityElement.textContent = `${this._city}, ${this._country}`;
     taglineElement.textContent = this._tagline;
     priceElement.textContent = `${this._price}€ / jour`;
+    likesCount.textContent = this._totalLikes;
 
     // add element in DOM
+    likesElement.appendChild(likesCount);
+    likesElement.appendChild(heartIcon);
     nameDiv.appendChild(nameTitle);
     nameDiv.appendChild(cityElement);
     nameDiv.appendChild(taglineElement);
+    insert.appendChild(likesElement);
     insert.appendChild(priceElement);
     return { nameDiv, img, insert };
   }
