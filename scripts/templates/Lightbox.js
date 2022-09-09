@@ -28,13 +28,14 @@ class LightBox {
 
     // set attributes
     closeButton.setAttribute("id", "close_lightbox");
+    closeButton.setAttribute("tabindex", "0");
     closeButton.setAttribute("aria-label", "Fermer le formulaire de contact");
 
     mediaElement.setAttribute("src", this._mediaPath);
     this._image
       ? mediaElement.setAttribute("alt", this._title)
-      : mediaElement.setAttribute("controls", "");
-
+      : mediaElement.setAttribute("aria-label", this._title);
+    if (this._video) mediaElement.setAttribute("controls", "");
     previous.setAttribute("id", "previous-media");
     next.setAttribute("id", "next-media");
     previous.setAttribute("aria-label", "image suivante");

@@ -103,7 +103,7 @@ class HandleLightbox {
     this.$mainWrapper.setAttribute("aria-hidden", "true");
 
     // display modal
-    this.$lightboxModal.classList.add("show-modal");
+    this.$lightboxModal.classList.replace("hide-modal", "show-modal");
     this.$lightboxModal.setAttribute("aria-hidden", "false");
     this.$body.classList.add("no-scroll");
 

@@ -35,7 +35,9 @@ class Media {
     // add attributes
     mediaElement.setAttribute("src", this.getMediaPath());
     mediaElement.setAttribute("tabindex", "3");
-    this._image ? mediaElement.setAttribute("alt", this._title) : null;
+    this._image
+      ? mediaElement.setAttribute("alt", this._title)
+      : mediaElement.setAttribute("aria-label", this._title);
     mediaElement.classList.add("media-object");
     infoDiv.classList.add("media-details");
     titleElement.classList.add("red-text");
