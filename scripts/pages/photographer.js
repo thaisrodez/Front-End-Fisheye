@@ -1,5 +1,3 @@
-/*global PhotographerApi, MediaApi, Photographer, HandleLightbox, LightBox, Media, SorterForm, ContactForm, submit*/
-
 class PhotographerPage {
   constructor() {
     this.photographerApi = new PhotographerApi("data/photographers.json");
