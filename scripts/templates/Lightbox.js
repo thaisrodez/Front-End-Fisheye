@@ -28,7 +28,6 @@ class LightBox {
 
     // set attributes
     closeButton.setAttribute("id", "close_lightbox");
-    closeButton.setAttribute("tabindex", "0");
     closeButton.setAttribute("aria-label", "Fermer le formulaire de contact");
 
     mediaElement.setAttribute("src", this._mediaPath);
@@ -53,8 +52,6 @@ class LightBox {
     closeButton.innerHTML = "<i class='fa-solid fa-xmark'></i>";
     previous.innerHTML = "<i class='fa-solid fa-chevron-left'></i>";
     next.innerHTML = "<i class='fa-solid fa-chevron-right'></i>";
-
-    closeButton.focus();
 
     // insert element in DOM$
     leftDiv.appendChild(previous);

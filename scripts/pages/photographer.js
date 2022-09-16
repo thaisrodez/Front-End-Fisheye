@@ -100,6 +100,8 @@ class PhotographerPage {
       mediaDom.addEventListener("click", (e) => {
         // get element throught dataset
         handleLightBox.show(e.target.dataset.id);
+        // set focus on lightbox navigation
+        document.getElementById("previous-media").focus();
       });
       mediaDom.addEventListener("keydown", (e) => {
         if (
@@ -107,6 +109,7 @@ class PhotographerPage {
           e.key === "Enter"
         ) {
           handleLightBox.show(e.target.dataset.id);
+          document.getElementById("previous-media").focus();
         }
       });
     });
