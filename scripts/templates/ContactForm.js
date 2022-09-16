@@ -61,10 +61,10 @@ class ContactForm {
     emailInput.setAttribute("type", "email");
     messageInput.setAttribute("rows", "8");
     // input labelledby
-    firstnameInput.setAttribute("aria-labelledby", "firstname");
-    lastnameInput.setAttribute("aria-labelledby", "lastname");
-    emailInput.setAttribute("aria-labelledby", "email");
-    messageInput.setAttribute("aria-labelledby", "message");
+    firstnameInput.setAttribute("aria-describedby", "firstname");
+    lastnameInput.setAttribute("aria-describedby", "lastname");
+    emailInput.setAttribute("aria-describedby", "email");
+    messageInput.setAttribute("aria-describedby", "message");
 
     // button
     submitButton.classList.add("contact_button");
