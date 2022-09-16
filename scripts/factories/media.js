@@ -34,7 +34,7 @@ class Media {
     mediaElement.setAttribute("data-id", this._id);
     // add attributes
     mediaElement.setAttribute("src", this.getMediaPath());
-    mediaElement.setAttribute("tabindex", "3");
+    mediaElement.setAttribute("tabindex", "0");
     this._image
       ? mediaElement.setAttribute("alt", this._title)
       : mediaElement.setAttribute("aria-label", this._title);
@@ -42,7 +42,7 @@ class Media {
     infoDiv.classList.add("media-details");
     titleElement.classList.add("red-text");
     likesElement.classList.add("red-text", "likes");
-    heartIcon.setAttribute("tabindex", "3");
+    heartIcon.setAttribute("tabindex", "0");
     heartIcon.setAttribute("aria-label", "likes");
     heartIcon.classList.add("like-btn");
     heartIcon.classList.add("fa-regular", "fa-heart");

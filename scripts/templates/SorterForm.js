@@ -73,7 +73,7 @@ class SorterForm {
       newOption.innerHTML = option.innerHTML;
       newOption.setAttribute("role", "option");
       newOption.setAttribute("id", option.value);
-      newOption.setAttribute("tabindex", "1");
+      newOption.setAttribute("tabindex", "0");
 
       // listen to click on each option
       newOption.addEventListener("click", (e) => {
