@@ -6,18 +6,12 @@
   row-gap: 68px;
 }
 
-.portfolio article img {
+.media-object {
   width: 350px;
   height: 350px;
   object-fit: cover;
   border-radius: 5px;
-}
-
-.portfolio article video {
-  width: 350px;
-  height: 350px;
-  object-fit: cover;
-  border-radius: 5px;
+  cursor: pointer;
 }
 
 .media-details {
@@ -34,6 +28,10 @@
   display: flex;
   gap: 6px;
   align-items: center;
+}
+
+.like-btn {
+  cursor: pointer;
 }
 
 .red-text {

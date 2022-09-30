@@ -2,6 +2,7 @@
 
 const mainWrapper = document.getElementById("main");
 const modal = document.getElementById("contact_modal");
+const body = document.querySelector("body");
 
 // get photographer name
 async function getPhotographer() {
@@ -24,8 +25,11 @@ async function displayModal() {
   modal.setAttribute("aria-describedby", `Contactez-moi ${photographer.name}`);
   mainWrapper.setAttribute("aria-hidden", "true");
   modal.setAttribute("aria-hidden", "false");
-  const closeButton = document.getElementById("close_button");
-  closeButton.focus();
+  // prevent scroll on body
+  body.classList.add("no-scroll");
+
+  const firstnameInput = document.getElementById("firstname");
+  firstnameInput.focus();
   handleKeyboardClose();
 }
 
@@ -34,6 +38,7 @@ function closeModal() {
   // set aria attributes
   mainWrapper.setAttribute("aria-hidden", "false");
   modal.setAttribute("aria-hidden", "true");
+  body.classList.remove("no-scroll");
 }
 
 function submit(event) {

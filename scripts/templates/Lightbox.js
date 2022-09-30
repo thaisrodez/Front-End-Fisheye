@@ -28,8 +28,7 @@ class LightBox {
 
     // set attributes
     closeButton.setAttribute("id", "close_lightbox");
-    closeButton.setAttribute("tabindex", "0");
-    closeButton.setAttribute("aria-label", "Fermer le formulaire de contact");
+    closeButton.setAttribute("aria-label", "Fermer la modale");
 
     mediaElement.setAttribute("src", this._mediaPath);
     this._image
@@ -38,8 +37,8 @@ class LightBox {
     if (this._video) mediaElement.setAttribute("controls", "");
     previous.setAttribute("id", "previous-media");
     next.setAttribute("id", "next-media");
-    previous.setAttribute("aria-label", "image suivante");
-    next.setAttribute("aria-label", "image précédente");
+    previous.setAttribute("aria-label", "image précédente");
+    next.setAttribute("aria-label", "image suivante");
 
     // add classes
     mediaElement.classList.add("lightbox-media");
@@ -53,8 +52,6 @@ class LightBox {
     closeButton.innerHTML = "<i class='fa-solid fa-xmark'></i>";
     previous.innerHTML = "<i class='fa-solid fa-chevron-left'></i>";
     next.innerHTML = "<i class='fa-solid fa-chevron-right'></i>";
-
-    closeButton.focus();
 
     // insert element in DOM$
     leftDiv.appendChild(previous);

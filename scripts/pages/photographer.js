@@ -1,4 +1,5 @@
-/* global PhotographerApi, MediaApi, Photographer, Sorter, SorterForm, HandleLightbox, Media, ContactForm, submit*/
+/* global PhotographerApi, MediaApi, Photographer, Sorter, SorterForm, HandleLightbox,
+Media, ContactForm, submit, displayLightbox, handleLikes */
 
 class PhotographerPage {
   constructor() {
@@ -9,7 +10,6 @@ class PhotographerPage {
     this.$photographerMain = document.getElementById("main");
     this.$portfolio = document.querySelector(".portfolio");
     this.$contactModal = document.querySelector(".modal");
-    this.$lightboxModal = document.getElementById("lightbox_modal");
   }
 
   async getPhotographer() {
@@ -34,43 +34,49 @@ class PhotographerPage {
     return photographerMedia;
   }
 
-  addLikes(element) {
-    element.textContent = parseInt(element.textContent) + 1;
-  }
+  // addLikes(element) {
+  //   element.textContent = parseInt(element.textContent) + 1;
+  // }
 
-  onLikesClick(btn, likeEl, totalLikeEl) {
-    btn.classList.replace("fa-regular", "fa-solid");
-    this.addLikes(likeEl);
-    this.addLikes(totalLikeEl);
-  }
+  // onLikesClick(btn, likeEl, totalLikeEl) {
+  //   btn.classList.replace("fa-regular", "fa-solid");
+  //   this.addLikes(likeEl);
+  //   this.addLikes(totalLikeEl);
+  // }
 
-  async handleLikes() {
-    const likesBtn = document.querySelectorAll(".like-btn");
-    const totalLikeText = document.getElementById("likes-count");
+  // async handleLikes() {
+  //   const likesBtn = document.querySelectorAll(".like-btn");
+  //   const totalLikeText = document.getElementById("likes-count");
 
-    likesBtn.forEach((btn) => {
-      // click
-      btn.addEventListener("click", () => {
-        const likeNumber = btn.parentElement.firstChild;
-        if (btn.classList.contains("fa-regular")) {
-          this.onLikesClick(btn, likeNumber, totalLikeText);
-        }
-      });
+  //   likesBtn.forEach((btn) => {
+  //     // click
+  //     btn.addEventListener("click", () => {
+  //       const likeNumber = btn.parentElement.firstChild;
+  //       if (btn.classList.contains("fa-regular")) {
+  //         this.onLikesClick(btn, likeNumber, totalLikeText);
+  //       }
+  //     });
 
-      // keyboard
-      btn.addEventListener("keydown", (e) => {
-        const likeNumber = btn.parentElement.firstChild;
-        if (btn.classList.contains("fa-regular") && e.key === "Enter") {
-          this.onLikesClick(btn, likeNumber, totalLikeText);
-        }
-      });
-    });
-  }
+  //     // keyboard
+  //     btn.addEventListener("keydown", (e) => {
+  //       const likeNumber = btn.parentElement.firstChild;
+  //       if (btn.classList.contains("fa-regular") && e.key === "Enter") {
+  //         this.onLikesClick(btn, likeNumber, totalLikeText);
+  //       }
+  //     });
+  //   });
+  // }
 
   async main() {
     const currentPhotographer = await this.getPhotographer();
     const medias = await this.getPhotographerMedias();
     let totalLikesArray = [];
+
+    // insert sorting button
+    const Sorter = new SorterForm(medias, currentPhotographer);
+    Sorter.render();
+
+    const handleLightBox = new HandleLightbox(medias, currentPhotographer);
 
     // insert photographer medias
     medias.forEach((media) => {
@@ -78,6 +84,8 @@ class PhotographerPage {
       const mediaModel = new Media(media, currentPhotographer);
       const mediaDom = mediaModel.getMediaCardDom();
       this.$portfolio.appendChild(mediaDom);
+      // lightbox
+      displayLightbox(mediaDom, handleLightBox);
     });
 
     // get total Likes
@@ -93,27 +101,7 @@ class PhotographerPage {
     this.$photographerMain.appendChild(insert);
 
     // handle likes
-    this.handleLikes();
-
-    const handleLightBox = new HandleLightbox(medias, currentPhotographer);
-    document.querySelectorAll(".media-object").forEach((mediaDom) => {
-      mediaDom.addEventListener("click", (e) => {
-        // get element throught dataset
-        handleLightBox.show(e.target.dataset.id);
-      });
-      mediaDom.addEventListener("keydown", (e) => {
-        if (
-          this.$lightboxModal.getAttribute("aria-hidden") === "true" &&
-          e.key === "Enter"
-        ) {
-          handleLightBox.show(e.target.dataset.id);
-        }
-      });
-    });
-
-    // insert sorting button
-    const Sorter = new SorterForm(medias, currentPhotographer);
-    Sorter.render();
+    handleLikes();
 
     // insert contact form
     const Form = new ContactForm(currentPhotographer);
