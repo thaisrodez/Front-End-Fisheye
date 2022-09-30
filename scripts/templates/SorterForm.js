@@ -1,4 +1,4 @@
-/* global Sorter, Media*/
+/* global Sorter, Media, HandleLightbox, displayLightbox*/
 
 class SorterForm {
   constructor(Medias, photographer) {
@@ -14,18 +14,25 @@ class SorterForm {
   sortMedias(sorter) {
     this.clearMediasWrapper();
 
+    const handleLightBox = new HandleLightbox(this.medias, this.photographer);
     if (sorter) {
       const sortedData = Sorter.sorter(this.medias, sorter);
       const sortedMedias = sortedData.data;
 
       sortedMedias.forEach((media) => {
         const template = new Media(media, this.photographer);
-        this.$portfolio.appendChild(template.getMediaCardDom());
+        const mediaDom = template.getMediaCardDom();
+        this.$portfolio.appendChild(mediaDom);
+        // lightbox
+        displayLightbox(mediaDom, handleLightBox);
       });
     } else {
       this.medias.forEach((media) => {
         const template = new Media(media, this.photographer);
-        this.$portfolio.appendChild(template.getMediaCardDom());
+        const mediaDom = template.getMediaCardDom();
+        this.$portfolio.appendChild(mediaDom);
+        // lightbox
+        displayLightbox(mediaDom, handleLightBox);
       });
     }
   }

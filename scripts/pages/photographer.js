@@ -1,4 +1,4 @@
-/* global PhotographerApi, MediaApi, Photographer, Sorter, SorterForm, HandleLightbox, Media, ContactForm, submit*/
+/* global PhotographerApi, MediaApi, Photographer, Sorter, SorterForm, HandleLightbox, Media, ContactForm, submit, displayLightbox*/
 
 class PhotographerPage {
   constructor() {
@@ -9,7 +9,6 @@ class PhotographerPage {
     this.$photographerMain = document.getElementById("main");
     this.$portfolio = document.querySelector(".portfolio");
     this.$contactModal = document.querySelector(".modal");
-    this.$lightboxModal = document.getElementById("lightbox_modal");
   }
 
   async getPhotographer() {
@@ -84,26 +83,8 @@ class PhotographerPage {
       const mediaModel = new Media(media, currentPhotographer);
       const mediaDom = mediaModel.getMediaCardDom();
       this.$portfolio.appendChild(mediaDom);
-
-      // display lightbox
-      const imgElement = mediaDom.firstChild;
-      // click
-      imgElement.addEventListener("click", (e) => {
-        // get element throught dataset
-        handleLightBox.show(e.target.dataset.id);
-        // set focus on lightbox navigation
-        document.getElementById("previous-media").focus();
-      });
-      // keyboard
-      imgElement.addEventListener("keydown", (e) => {
-        if (
-          this.$lightboxModal.getAttribute("aria-hidden") === "true" &&
-          e.key === "Enter"
-        ) {
-          handleLightBox.show(e.target.dataset.id);
-          document.getElementById("previous-media").focus();
-        }
-      });
+      // lightbox
+      displayLightbox(mediaDom, handleLightBox);
     });
 
     // get total Likes
