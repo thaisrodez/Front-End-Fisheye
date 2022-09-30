@@ -1,4 +1,4 @@
-/* global Sorter, Media, HandleLightbox, displayLightbox*/
+/* global Sorter, Media, HandleLightbox, displayLightbox, handleLikes */
 
 class SorterForm {
   constructor(Medias, photographer) {
@@ -25,6 +25,8 @@ class SorterForm {
         this.$portfolio.appendChild(mediaDom);
         // lightbox
         displayLightbox(mediaDom, handleLightBox);
+        // likes
+        handleLikes();
       });
     } else {
       this.medias.forEach((media) => {
@@ -33,6 +35,8 @@ class SorterForm {
         this.$portfolio.appendChild(mediaDom);
         // lightbox
         displayLightbox(mediaDom, handleLightBox);
+        // likes
+        handleLikes();
       });
     }
   }

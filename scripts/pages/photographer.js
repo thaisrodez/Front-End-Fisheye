@@ -1,4 +1,5 @@
-/* global PhotographerApi, MediaApi, Photographer, Sorter, SorterForm, HandleLightbox, Media, ContactForm, submit, displayLightbox*/
+/* global PhotographerApi, MediaApi, Photographer, Sorter, SorterForm, HandleLightbox,
+Media, ContactForm, submit, displayLightbox, handleLikes */
 
 class PhotographerPage {
   constructor() {
@@ -33,38 +34,38 @@ class PhotographerPage {
     return photographerMedia;
   }
 
-  addLikes(element) {
-    element.textContent = parseInt(element.textContent) + 1;
-  }
+  // addLikes(element) {
+  //   element.textContent = parseInt(element.textContent) + 1;
+  // }
 
-  onLikesClick(btn, likeEl, totalLikeEl) {
-    btn.classList.replace("fa-regular", "fa-solid");
-    this.addLikes(likeEl);
-    this.addLikes(totalLikeEl);
-  }
+  // onLikesClick(btn, likeEl, totalLikeEl) {
+  //   btn.classList.replace("fa-regular", "fa-solid");
+  //   this.addLikes(likeEl);
+  //   this.addLikes(totalLikeEl);
+  // }
 
-  async handleLikes() {
-    const likesBtn = document.querySelectorAll(".like-btn");
-    const totalLikeText = document.getElementById("likes-count");
+  // async handleLikes() {
+  //   const likesBtn = document.querySelectorAll(".like-btn");
+  //   const totalLikeText = document.getElementById("likes-count");
 
-    likesBtn.forEach((btn) => {
-      // click
-      btn.addEventListener("click", () => {
-        const likeNumber = btn.parentElement.firstChild;
-        if (btn.classList.contains("fa-regular")) {
-          this.onLikesClick(btn, likeNumber, totalLikeText);
-        }
-      });
+  //   likesBtn.forEach((btn) => {
+  //     // click
+  //     btn.addEventListener("click", () => {
+  //       const likeNumber = btn.parentElement.firstChild;
+  //       if (btn.classList.contains("fa-regular")) {
+  //         this.onLikesClick(btn, likeNumber, totalLikeText);
+  //       }
+  //     });
 
-      // keyboard
-      btn.addEventListener("keydown", (e) => {
-        const likeNumber = btn.parentElement.firstChild;
-        if (btn.classList.contains("fa-regular") && e.key === "Enter") {
-          this.onLikesClick(btn, likeNumber, totalLikeText);
-        }
-      });
-    });
-  }
+  //     // keyboard
+  //     btn.addEventListener("keydown", (e) => {
+  //       const likeNumber = btn.parentElement.firstChild;
+  //       if (btn.classList.contains("fa-regular") && e.key === "Enter") {
+  //         this.onLikesClick(btn, likeNumber, totalLikeText);
+  //       }
+  //     });
+  //   });
+  // }
 
   async main() {
     const currentPhotographer = await this.getPhotographer();
@@ -89,8 +90,6 @@ class PhotographerPage {
 
     // get total Likes
     const totalLikes = totalLikesArray.reduce((a, b) => a + b);
-    // handle likes
-    this.handleLikes();
 
     // insert photographer bio details
     const photographerModel = new Photographer(currentPhotographer, totalLikes);
@@ -100,6 +99,9 @@ class PhotographerPage {
     this.$photographerHeader.prepend(nameDiv);
     this.$photographerHeader.appendChild(img);
     this.$photographerMain.appendChild(insert);
+
+    // handle likes
+    handleLikes();
 
     // insert contact form
     const Form = new ContactForm(currentPhotographer);
