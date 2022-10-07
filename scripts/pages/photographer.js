@@ -1,5 +1,5 @@
 /* global PhotographerApi, MediaApi, Photographer, Sorter, SorterForm, HandleLightbox,
-Media, ContactForm, submit, displayLightbox, handleLikes */
+Media, ContactForm, submit, displayLightbox, handleLikes, UtilForm */
 
 class PhotographerPage {
   constructor() {
@@ -9,7 +9,7 @@ class PhotographerPage {
     this.$photographerHeader = document.querySelector(".photograph-header");
     this.$photographerMain = document.getElementById("main");
     this.$portfolio = document.querySelector(".portfolio");
-    this.$contactModal = document.querySelector(".modal");
+    this.$contactBtn = document.querySelector(".contact_button");
   }
 
   async getPhotographer() {
@@ -33,39 +33,6 @@ class PhotographerPage {
     );
     return photographerMedia;
   }
-
-  // addLikes(element) {
-  //   element.textContent = parseInt(element.textContent) + 1;
-  // }
-
-  // onLikesClick(btn, likeEl, totalLikeEl) {
-  //   btn.classList.replace("fa-regular", "fa-solid");
-  //   this.addLikes(likeEl);
-  //   this.addLikes(totalLikeEl);
-  // }
-
-  // async handleLikes() {
-  //   const likesBtn = document.querySelectorAll(".like-btn");
-  //   const totalLikeText = document.getElementById("likes-count");
-
-  //   likesBtn.forEach((btn) => {
-  //     // click
-  //     btn.addEventListener("click", () => {
-  //       const likeNumber = btn.parentElement.firstChild;
-  //       if (btn.classList.contains("fa-regular")) {
-  //         this.onLikesClick(btn, likeNumber, totalLikeText);
-  //       }
-  //     });
-
-  //     // keyboard
-  //     btn.addEventListener("keydown", (e) => {
-  //       const likeNumber = btn.parentElement.firstChild;
-  //       if (btn.classList.contains("fa-regular") && e.key === "Enter") {
-  //         this.onLikesClick(btn, likeNumber, totalLikeText);
-  //       }
-  //     });
-  //   });
-  // }
 
   async main() {
     const currentPhotographer = await this.getPhotographer();
@@ -103,14 +70,8 @@ class PhotographerPage {
     // handle likes
     handleLikes();
 
-    // insert contact form
-    const Form = new ContactForm(currentPhotographer);
-    const formHeader = Form.getHeader();
-    const formBody = Form.getForm();
-    this.$contactModal.appendChild(formHeader);
-    this.$contactModal.appendChild(formBody);
-    // listen to form submission
-    formBody.addEventListener("submit", submit);
+    const utilForm = new UtilForm(currentPhotographer);
+    this.$contactBtn.addEventListener("click", () => utilForm.displayModal());
   }
 }
 

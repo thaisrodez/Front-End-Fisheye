@@ -67,7 +67,7 @@ form div {
   display: flex;
   flex-direction: column;
   width: 100%;
-  align-items: self-start;
+  align-items: flex-start;
   margin-bottom: 26px;
 }
 
@@ -82,4 +82,12 @@ form textarea {
   width: 100%;
   border: none;
   border-radius: 5px;
+}
+
+#error-message {
+  color: #901C1C;
+}
+
+.invalid {
+  border: #901C1C 2px solid;
 }
